@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>背に腹は蛙｜歌詞帳</title>
+<meta name="description" content="背に腹は蛙 歌詞帳">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:#111}
+body{font-family:serif;overflow-x:hidden}
+header{padding:18px 12px 14px;text-align:center;font-size:11px;letter-spacing:.18em}
+main{width:100%;margin:0 auto}
+.spread{width:100%;margin:0 auto 10px;display:block}
+.spread img{display:block;width:100%;height:auto}
+/* スマホでは見開きを左右のページに分けて、1ページずつ縦に読む */
+.mobile-pages{display:none}
+.page-half{position:relative;width:100%;overflow:hidden;background:#fff;aspect-ratio:5717 / 5670}
+.page-half img{position:absolute;top:0;width:200%;max-width:none;height:100%;object-fit:fill}
+.page-half.left img{left:0}
+.page-half.right img{left:-100%}
+.viewer{position:fixed;inset:0;z-index:20;display:none;background:rgba(255,255,255,.98);overflow:auto;touch-action:pinch-zoom}
+.viewer.open{display:block}
+.viewer img{display:block;width:100%;height:auto;min-width:100%;margin:auto}
+.close{position:fixed;right:14px;top:10px;z-index:21;width:34px;height:34px;border:0;background:rgba(255,255,255,.9);font:28px/30px sans-serif;cursor:pointer}
+@media (max-width:600px){
+  header{padding:12px 8px 10px;font-size:10px}
+  .desktop-spreads{display:none}
+  .mobile-pages{display:block}
+  .page-half{margin:0 0 3px}
+}
+@media (min-width:601px){
+  .desktop-spreads{display:block;max-width:1200px;margin:0 auto}
+  .spread{margin-bottom:18px}
+}
+</style>
+</head>
+<body>
+<header>背に腹は蛙　｜　歌詞帳</header>
+<main>
+  <section class="desktop-spreads">
+    <div class="spread"><img src="assets/01-16.png" alt="歌詞帳 01-16"></div>
+    <div class="spread"><img src="assets/02-03.png" alt="歌詞帳 02-03"></div>
+    <div class="spread"><img src="assets/04-05.png" alt="歌詞帳 04-05"></div>
+    <div class="spread"><img src="assets/06-07.png" alt="歌詞帳 06-07"></div>
+    <div class="spread"><img src="assets/08-09.png" alt="歌詞帳 08-09"></div>
+    <div class="spread"><img src="assets/10-11.png" alt="歌詞帳 10-11"></div>
+    <div class="spread"><img src="assets/12-13.png" alt="歌詞帳 12-13"></div>
+    <div class="spread"><img src="assets/14-15.png" alt="歌詞帳 14-15"></div>
+  </section>
+  <section class="mobile-pages">
+    <!-- 右綴じ：右ページ→左ページの順で読む -->
+    <div class="page-half right"><img src="assets/01-16.png" alt="歌詞帳 01"></div>
+    <div class="page-half left"><img src="assets/01-16.png" alt="歌詞帳 16"></div>
+    <div class="page-half right"><img src="assets/02-03.png" alt="歌詞 02"></div>
+    <div class="page-half left"><img src="assets/02-03.png" alt="歌詞 03"></div>
+    <div class="page-half right"><img src="assets/04-05.png" alt="歌詞 04"></div>
+    <div class="page-half left"><img src="assets/04-05.png" alt="歌詞 05"></div>
+    <div class="page-half right"><img src="assets/06-07.png" alt="歌詞 06"></div>
+    <div class="page-half left"><img src="assets/06-07.png" alt="歌詞 07"></div>
+    <div class="page-half right"><img src="assets/08-09.png" alt="歌詞 08"></div>
+    <div class="page-half left"><img src="assets/08-09.png" alt="歌詞 09"></div>
+    <div class="page-half right"><img src="assets/10-11.png" alt="歌詞 10"></div>
+    <div class="page-half left"><img src="assets/10-11.png" alt="歌詞 11"></div>
+    <div class="page-half right"><img src="assets/12-13.png" alt="歌詞 12"></div>
+    <div class="page-half left"><img src="assets/12-13.png" alt="歌詞 13"></div>
+    <div class="page-half right"><img src="assets/14-15.png" alt="歌詞 14"></div>
+    <div class="page-half left"><img src="assets/14-15.png" alt="歌詞 15"></div>
+  </section>
+</main>
+<div class="viewer" id="viewer"><button class="close" aria-label="閉じる">×</button><img id="viewerImg" alt=""></div>
+<script>
+const viewer=document.getElementById('viewer');
+const viewerImg=document.getElementById('viewerImg');
+document.querySelectorAll('.mobile-pages .page-half').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const img=el.querySelector('img');
+    viewerImg.src=img.src;
+    viewerImg.alt=img.alt;
+    viewer.classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+});
+function closeViewer(){viewer.classList.remove('open');document.body.style.overflow='';}
+viewer.addEventListener('click',e=>{if(e.target===viewer||e.target.classList.contains('close'))closeViewer()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer()});
+</script>
+</body>
+</html>
